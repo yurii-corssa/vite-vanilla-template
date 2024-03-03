@@ -45,4 +45,4 @@ This command will generate a dist folder that you can deploy to any static file 
 
 ## License
 
-This template is open source and available under the ![MIT License](./LICENSE).
+This template is open source and available under the [MIT License](./LICENSE).
