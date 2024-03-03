@@ -7,6 +7,7 @@ import { fileURLToPath } from "url";
 import { ViteImageOptimizer } from "vite-plugin-image-optimizer";
 
 export default defineConfig({
+  root: "./src",
   plugins: [
     ViteImageOptimizer({
       png: {
@@ -32,7 +33,7 @@ export default defineConfig({
     rollupOptions: {
       input: Object.fromEntries(
         glob
-          .sync(["./*.html", "./pages/**/*.html"])
+          .sync(["./src/*.html", "./src/pages/**/*.html"])
           .map((file) => [
             path.relative(
               __dirname,
