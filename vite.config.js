@@ -5,10 +5,11 @@ import { defineConfig } from "vite";
 import glob from "fast-glob";
 import { fileURLToPath } from "url";
 import { ViteImageOptimizer } from "vite-plugin-image-optimizer";
+import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
-  root: "./src",
   plugins: [
+    tsconfigPaths(),
     ViteImageOptimizer({
       png: {
         quality: 86,
@@ -28,17 +29,15 @@ export default defineConfig({
       apply: "serve",
     },
   ],
+  base: "/vite-vanilla-template/",
   build: {
     minify: false, // disable minification
     rollupOptions: {
       input: Object.fromEntries(
         glob
-          .sync(["./src/*.html", "./src/pages/**/*.html"])
+          .sync(["./*.html", "./pages/**/*.html"])
           .map((file) => [
-            path.relative(
-              __dirname,
-              file.slice(0, file.length - path.extname(file).length)
-            ),
+            path.relative(__dirname, file.slice(0, file.length - path.extname(file).length)),
             fileURLToPath(new URL(file, import.meta.url)),
           ])
       ),
@@ -47,6 +46,5 @@ export default defineConfig({
         assetFileNames: "assets/[name].[ext]",
       },
     },
-    outDir: "../dist",
   },
 });
